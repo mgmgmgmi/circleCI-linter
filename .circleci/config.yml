@@ -1,0 +1,32 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:7.10
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys: 
+            - composer-{{ .Branch }}-{{ checksum "package.json" }}
+      - run: yarn install
+
+      - run: 
+          name: "Setup develop branch variable"
+          command: echo 'export BASE_BRANCH="develop"' >> $BASH_ENV 
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: composer-{{ .Branch }}-{{ checksum "package.json" }}
+
+      - run:
+          name: diff branches
+          command: |
+            echo ${BASE_BRANCH}
+            echo ${CIRCLE_BRANCH}
+
+      - run: # yarn eslint xxx.js
+          name: js lint 
+          command: git diff --name-only --diff-filter=ACMR origin/${BASE_BRANCH}..origin/${CIRCLE_BRANCH} -- '*.js' | xargs -r yarn eslint
