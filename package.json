@@ -1,11 +1,19 @@
 {
   "name": "circleci",
   "version": "1.0.0",
-  "description": "",
   "main": "mgmgmgmi.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mgmgmgmi/circleCI-linter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mgmgmgmi/circleCI-linter/issues"
+  },
+  "homepage": "https://github.com/mgmgmgmi/circleCI-linter#readme",
+  "description": ""
 }

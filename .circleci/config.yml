@@ -21,12 +21,6 @@ jobs:
             - node_modules
           key: composer-{{ .Branch }}-{{ checksum "package.json" }}
 
-      - run:
-          name: diff branches
-          command: |
-            echo ${BASE_BRANCH}
-            echo ${CIRCLE_BRANCH}
-
       - run: # yarn eslint xxx.js
           name: js lint 
           command: git diff --name-only --diff-filter=ACMR origin/${BASE_BRANCH}..origin/${CIRCLE_BRANCH} -- '*.js' | xargs -r yarn eslint
